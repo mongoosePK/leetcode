@@ -39,12 +39,21 @@ class Solution:
     def makeTree(self, n):
         if (n <= 0):
             return None
-        left = makeTree(int(n/2)
+        left = self.makeTree(int(n/2))
         root = TreeNode(self.temp.val)
-        self.temp.next
+        self.temp = self.temp.next
+        root.left = left
+
+        root.right = self.makeTree(n-int(n/2)-1)
+        return root
+
 
     def sortedListToBST(self, head):
-        n = self.countList(head)
-
-
+        self.temp = head
+        if head == None:
+            return None
         
+        n = self.countList(head)
+        if n == 1:
+            return TreeNode(head.val)
+        return self.makeTree(n)
